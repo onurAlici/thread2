@@ -1,4 +1,4 @@
-package com.forum.thread;
+package com.forum.thread.entity;
 
 
 import lombok.Getter;
@@ -23,9 +23,22 @@ public class Comment {
     private Timestamp timeUpdated;
     private String text;
 
+    public Comment() {}
+    public Comment(Thread thread, UserObject user, String text) {
+        this.thread = thread;
+        this.user = user;
+        this.text = text;
+    }
+    public Comment(Thread thread, String comment_id, UserObject user, String text) {
+        this.thread = thread;
+        this.id = Long.valueOf(comment_id);
+        this.user = user;
+        this.text = text;
+    }
+
     @ManyToOne
     @JoinColumn(name="author_id", nullable=false)
-    private User user;
+    private UserObject user;
     @ManyToOne
     @JoinColumn(name="thread_id", nullable=false)
     private Thread thread;
